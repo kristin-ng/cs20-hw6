@@ -1,0 +1,28 @@
+h1 {
+  text-align: center;
+  color: #13923f;
+}
+p {
+  text-align: center;
+}
+.result {
+  text-align: center;
+  width: 40%;
+}
+.factor {
+  width: 40%;
+}
+.sum {
+  width: 40%;
+}
+button {
+  margin-top: 1%;
+  border-color: #949494;
+  background-color: #13923f;
+  color: #fff;
+}
+form {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}

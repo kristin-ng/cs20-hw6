@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="index.css" />
+  <script language="javascript">
+    // purpose: pop-up to see if numbers are correct
+    function showNum(){
+       var num1, num2, factors1, factors2, sum1, sum2;
+
+      // get factors and sums for num1 
+      num1 = amicable.num1.value;
+      factors1 = getFactors(num1);
+      sum1 = sumFactors(factors1);
+
+      // get factors and sums for num2 
+      num2 = amicable.num2.value;
+      factors2 = getFactors(num2);
+      sum2 = sumFactors(factors2);
+
+        alert("Num: " + num1 +" "+ num2 );
+        alert("Sum: " + sum1 +" "+sum2)
+        
+    }
+    //purpose: main function to see if numbers are amicable
+    function check_amicable(){
+      var num1, num2, factors1, factors2, sum1, sum2;
+
+      // get factors and sums for num1 
+      num1 = amicable.num1.value;
+      factors1 = getFactors(num1);
+      sum1 = sumFactors(factors1);
+
+      // get factors and sums for num2 
+      num2 = amicable.num2.value;
+      factors2 = getFactors(num2);
+      sum2 = sumFactors(factors2);
+      console.log(num1, num2, sum1, sum2);
+
+      //check if amicable
+      display_result(num1, num2, sum1, sum2);
+      display_math(factors1, factors2, sum1, sum2);
+    }
+    function display_math(factors1, factors2, sum1, sum2) {
+      document.getElementById("factors1").value = factorsString(factors1);
+      document.getElementById("factors2").value = factorsString(factors2);
+      document.getElementById("sum1").value = "= " + sum1;
+      document.getElementById("sum2").value = "= " + sum2;
+    }
+    //purpose: determine if amicable and display result
+    function display_result(num1, num2, sum1, sum2) {
+      if (num1 == num2) {
+        document.getElementById("is_amicable").value =
+          num1 + " and " + num2 + " are not amicable. They are the same number.";
+      } else {
+        var equal = num1 == sum2 && num2 == sum1 ? true : false;
+        if (equal) {
+          document.getElementById("is_amicable").value =
+            num1 + " and " + num2 + " are amicable";
+        } else {
+          document.getElementById("is_amicable").value =
+            num1 + " and " + num2 + " are not amicable";
+        }
+      }
+    }
+    //purpose: get array of factors of given number
+    function getFactors(num) {
+      var factorList = new Array();
+      for (i = 1; i < num; i++) {
+        if (isFactor(num, i)) {
+            factorList.push(i);
+        }
+
+      }
+      return factorList;
+    }
+    // purpose: add factors together into sum
+    function sumFactors(factor) {
+      var sum = 0;
+      for (i = 0; i < factor.length; i++) {
+        sum += factor[i];
+      }
+      return sum;
+    }
+    //purpose: determine if i is factor of num
+    function isFactor(num, i) {
+      return num % i == 0 ? true : false;
+    }
+    function factorsString(factors) {
+      var string = " ";
+      factors.forEach(function(item, index) {
+        if (index < factors.length - 1)
+          string += item + ", ";
+        else
+          string += item
+      });
+      string += " ";
+      return string;
+    }
+  </script>
+</head>
+<body>
+  <form id="amicable">
+    <h1>Amicable Number Checker!</h1>
+    <p>
+      A pair of numbers are amicable if their factors (excluding themselves) add
+      up to each other.
+    </p>
+
+    <fieldset>
+      <legend> Enter Your Numbers! </legend>
+      <input type="number" id="num1" placeholder="1st number" />
+      <input type="number" id="num2" placeholder="2nd number" />
+      <button type="button" onClick="check_amicable()">Check Amicability!</button>
+    </fieldset>
+    <fieldset>
+      <legend> Get Your Results! </legend>
+      <div class="results">
+        <input class="result" id="is_amicable" disabled />
+      </div>
+      <div class="math1">
+        <input class="factor" id="factors1" disabled />
+        <input class="factor" id="factors2" disabled />
+      </div>
+      <div class="math2">
+        <input class="sum" id="sum1" disabled />
+        <input class="sum" id="sum2" disabled />
+      </div>
+    </fieldset>
+  </form>
+  <button type="button" class="popup" onclick="showNum()"> Click me to show the Numbers! </button>
+</body>
+</html>
